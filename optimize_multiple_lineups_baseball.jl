@@ -1,4 +1,9 @@
 # This code solves for multiple baseball lineups
+# use Pkg
+# Pkg.add("JuMP")
+# Pkg.add("DataFrames")
+# Pkg.add("GLPKMathProgInterface")
+# Pkg.add("MathProgBase")
 
 include("data_cleaning.jl")
 include("baseball_formulations.jl")  #this code has all the different formualations

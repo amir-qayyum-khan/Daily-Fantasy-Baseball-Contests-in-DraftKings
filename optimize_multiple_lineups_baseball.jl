@@ -3,6 +3,9 @@
 include("data_cleaning.jl")
 include("baseball_formulations.jl")  #this code has all the different formualations
 
+# Pkg.add("MathProgBase")
+# Pkg.add("SpecialFunctions")
+# Pkg.add("CSV")
 
 ################################################################################################################
 ################################################################################################################

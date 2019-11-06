@@ -1,7 +1,7 @@
 #this file has a bunch of data cleaning functions
 using DataFrames
-
-
+using DataArrays
+using CSV
 
 ################################################################################################################
 function clean_order(Order)  #cleans up the batting order so that it is a number
@@ -24,8 +24,8 @@ end
 ################################################################################################################
 # read_player_data loads information from hitters and pitchesr files into a single table
 function read_player_data(path_hitters,path_pitchers)
-    pitchers = readtable(path_pitchers);
-    hitters = readtable(path_hitters);
+    pitchers = CSV.read(path_pitchers);
+    hitters = CSV.read(path_hitters);
 
 
     function clean_str(str)
@@ -53,7 +53,6 @@ function read_player_data(path_hitters,path_pitchers)
             return  x;
         end
     end
-
 
     p=map(clean_num, [pitchers[:Proj_FP]; hitters[:Proj_FP]]);
     proj_val=map(clean_num, [pitchers[:Proj_Val]; hitters[:Proj_Val]]);

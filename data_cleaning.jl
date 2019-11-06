@@ -1,5 +1,7 @@
 #this file has a bunch of data cleaning functions
 using DataFrames
+using AlgebraicMultigrid
+using DataArrays
 
 
 
@@ -7,7 +9,7 @@ using DataFrames
 function clean_order(Order)  #cleans up the batting order so that it is a number
     Order_clean =[];
     for order in Order
-        if ~(typeof(order)==DataArrays.NAtype)
+        if ~(typeof(order)==DataArrays.NA)
             if isa(parse(order), Number) 
                 order_clean = parse(order); 
             else
@@ -58,6 +60,8 @@ function read_player_data(path_hitters,path_pitchers)
     p=map(clean_num, [pitchers[:Proj_FP]; hitters[:Proj_FP]]);
     proj_val=map(clean_num, [pitchers[:Proj_Val]; hitters[:Proj_Val]]);
     a=map(clean_num,[pitchers[:Actual_FP]; hitters[:Actual_FP]]);
+
+    print(zeros(size(pitchers)[1]))
     players = DataFrame(Player_Name = [pitchers[:Player_Name]; hitters[:Player_Name]],
                         Team = [pitchers[:Team]; hitters[:Team]],
                         Opp=[pitchers[:Opp] ;hitters[:Opp]],
@@ -67,7 +71,7 @@ function read_player_data(path_hitters,path_pitchers)
                         Proj_FP=p,
                         Proj_Val = proj_val,
                         Actual_FP=a,
-                        Batting_Order_Confirmed_ = [round(Int,zeros(size(pitchers)[1])); clean_order(hitters[:Batting_Order_Confirmed_])]
+                        Batting_Order_Confirmed_=[zeros(size(pitchers))[1]; clean_order(hitters[:Batting_Order_Confirmed_])]
                         );
 
     return players;

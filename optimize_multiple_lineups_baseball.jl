@@ -4,9 +4,13 @@
 # Pkg.add("DataFrames")
 # Pkg.add("GLPKMathProgInterface")
 # Pkg.add("MathProgBase")
+# Pkg.add("TickTock")
+# Pkg.add("AlgebraicMultigrid")
+# Pkg.add("DataArrays")
 
 include("data_cleaning.jl")
 include("baseball_formulations.jl")  #this code has all the different formualations
+using TickTock
 
 
 ################################################################################################################
@@ -45,9 +49,9 @@ path_to_output_actual = string("actual_baseball_", string(formulation), "_stacks
 println("Calculating DraftKings baseball linueps.\n ", num_lineups, " lineups\n","Formulation  ",formulation,
 "\nOverlap = ", num_overlap,"\nStack size = ", stack_size)
 
-tic()
+tick()
 create_lineups(num_lineups, num_overlap, stack_size,formulation, path_pitchers,path_hitters,  path_to_output);
-telapsed = toq();
+telapsed = tock();
 
 println("\nCalculated DraftKings baseball lineups.\n\tNumber of lineups = ", num_lineups, " \n\tStack size = ",stack_size,
 "\n\tOverlap = ", num_overlap,"\n" )
